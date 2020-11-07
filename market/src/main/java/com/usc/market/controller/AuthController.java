@@ -1,17 +1,20 @@
 package com.usc.market.controller;
 
+import com.usc.market.JwtTokenUtil;
 import com.usc.market.model.AuthEntity;
 import com.usc.market.model.UserEntity;
 import com.usc.market.repo.AuthorizationRepository;
 import com.usc.market.repo.UserRepository;
 import com.usc.market.vo.Credential;
 import com.usc.market.vo.Response;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Base64;
+import java.util.Collections;
 
 /**
  * AuthController
@@ -28,6 +31,9 @@ public class AuthController {
 
     private final UserRepository userRepository;
 
+    @Autowired
+    private JwtTokenUtil tokenUtil;
+
     public AuthController(AuthorizationRepository authorizationRepository, UserRepository userRepository) {
         this.authorizationRepository = authorizationRepository;
         this.userRepository = userRepository;
@@ -40,12 +46,7 @@ public class AuthController {
              return Response.fail("Wrong Username/Password.");
         }
 
-        // auth updater.
-        long ts = new java.util.Date().getTime();
-        String rawToken = user.getUsername() + "-" + ts;
-
-        String token = new String(Base64.getEncoder().encode(rawToken.getBytes()));
-
+        String token = tokenUtil.generateToken(new User(user.getUsername(), user.getPassword(), Collections.emptyList()));
         // persist to db
         authorizationRepository.save(new AuthEntity(user.getUsername(), token));
 
