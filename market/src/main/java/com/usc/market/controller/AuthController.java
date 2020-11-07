@@ -19,9 +19,7 @@ import java.util.Collections;
 /**
  * AuthController
  * Usage:
- *
- * @author heleninsa
- * create time 2020/11/1 - 5:56 PM
+ *  Authentication Controller
  */
 @RestController
 @RequestMapping("/auth")

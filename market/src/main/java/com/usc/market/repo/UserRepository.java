@@ -4,13 +4,6 @@ import com.usc.market.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-/**
- * UserEntityRepository
- * Usage:
- *
- * @author heleninsa
- * create time 2020/11/1 - 10:12 PM
- */
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 

@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * AccountController
  * Usage:
- *
- * @author heleninsa
- * create time 2020/11/6 - 12:19 AM
+ *  Account management controller
  */
 @RequestMapping("/account")
 public class AccountController {

@@ -11,7 +11,7 @@ create table if not exists user
     email      varchar(512) not null,
     usc_id     varchar(512) not null,
     mobile     varchar(512) not null,
-    gmt_update bigint not null
+    gmt_update bigint       not null
 )
     character set 'utf8mb4';
 
@@ -27,15 +27,27 @@ create table if not exists auth
 drop table if exists listing;
 create table if not exists listing
 (
-    listingID   integer primary key auto_increment,
-    ownerID     integer not null,
-    itemName    varchar(80) not null,
-    itemDescription varchar(500),
-    quantity    integer not null,
-    quality     enum('Brand New', 'New-Open Box', 'Like New', 'Used-Very Good', 'Used-Good', 'Used-Acceptable') not null,
-    image       varchar(100),
-    pickupLoc   enum('Tommy Trojan', 'Hecuba', 'Lyon Center', 'SAL', 'USC Bookstore', 'Leavey') not null,
-    sold        boolean not null,
-    held        boolean not null,
-    FOREIGN KEY (ownerID) REFERENCES user(id)
+    listing_id       integer primary key auto_increment,
+    owner_id         integer     not null,
+    item_name        varchar(80) not null,
+    item_description varchar(500),
+    quantity         integer     not null,
+    # quality     enum('Brand New', 'New-Open Box', 'Like New', 'Used-Very Good', 'Used-Good', 'Used-Acceptable') not null,
+    quality          int         not null,
+    image            varchar(1024),
+    # pickupLoc   enum('Tommy Trojan', 'Hecuba', 'Lyon Center', 'SAL', 'USC Bookstore', 'Leavey') not null,
+    pickup_loc       int         not null,
+    sold             boolean     not null,
+    held             boolean     not null,
+    FOREIGN KEY (owner_iD) REFERENCES user (id)
+) character set 'utf8mb4';
+
+
+drop table if exists favorite_listing;
+create table if not exists favorite_listing
+(
+    user_id    int not null,
+    listing_id int not null,
+    gmt_create long not null,
+    primary key (user_id, listing_id)
 )
