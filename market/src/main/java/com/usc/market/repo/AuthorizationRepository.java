@@ -1,6 +1,6 @@
 package com.usc.market.repo;
 
-import com.usc.market.model.Authorization;
+import com.usc.market.model.AuthEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,8 +12,8 @@ import org.springframework.stereotype.Repository;
  * create time 2020/11/1 - 11:17 下午
  */
 @Repository
-public interface AuthorizationRepository extends JpaRepository<Authorization, String> {
+public interface AuthorizationRepository extends JpaRepository<AuthEntity, String> {
 
-    Authorization findByUsername(String username);
+    AuthEntity findByUsername(String username);
 
 }

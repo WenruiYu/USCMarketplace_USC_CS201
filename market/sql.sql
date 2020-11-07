@@ -6,8 +6,12 @@ create table if not exists user
     id         integer primary key auto_increment,
     username   varchar(255) not null,
     password   varchar(255) not null,
-    tel        varchar(255) not null,
-    gmt_update timestamp    not null default current_timestamp()
+
+    real_name  varchar(512) not null,
+    email      varchar(512) not null,
+    usc_id     varchar(512) not null,
+    mobile     varchar(512) not null,
+    gmt_update bigint not null
 )
     character set 'utf8mb4';
 
@@ -15,7 +19,7 @@ create table if not exists user
 drop table if exists auth;
 create table if not exists auth
 (
-    username varchar(255)  not null primary key ,
+    username varchar(255)  not null primary key,
     token    varchar(1024) not null
 )
-    character set  'utf8mb4';
+    character set 'utf8mb4';

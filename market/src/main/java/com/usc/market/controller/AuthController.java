@@ -1,12 +1,11 @@
 package com.usc.market.controller;
 
-import com.usc.market.model.Authorization;
-import com.usc.market.model.User;
+import com.usc.market.model.AuthEntity;
+import com.usc.market.model.UserEntity;
 import com.usc.market.repo.AuthorizationRepository;
 import com.usc.market.repo.UserRepository;
 import com.usc.market.vo.Credential;
 import com.usc.market.vo.Response;
-import com.usc.market.vo.UserVO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,8 +34,8 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public Response<Object> login(@RequestBody Credential user) {
-        User matcher = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
+    public Response<String> login(@RequestBody Credential user) {
+        UserEntity matcher = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         if (matcher == null) {
              return Response.fail("用户名或密码错误。");
         }
@@ -48,9 +47,35 @@ public class AuthController {
         String token = new String(Base64.getEncoder().encode(rawToken.getBytes()));
 
         // persist to db
-        authorizationRepository.save(new Authorization(user.getUsername(), token));
+        authorizationRepository.save(new AuthEntity(user.getUsername(), token));
 
-        return Response.suc(new UserVO(matcher.getId(), matcher.getUsername(), null, matcher.getTel(), token));
+        return Response.ok(token);
+    }
+
+    @PostMapping("/register")
+    public Response<String> register(@RequestBody UserEntity user) {
+        user.setId(0);
+        user.setGmtUpdate(System.currentTimeMillis());
+
+        if (user.getUscId().isBlank() || user.getEmail().isBlank() || user.getPassword().isBlank() || user.getRealName().isBlank() || user.getUsername().isBlank()) {
+            return Response.fail("Please fill all information!");
+        }
+
+        if (!user.getEmail().endsWith("@usc.edu")) {
+            return Response.fail("Invalid email.");
+        }
+
+        if (userRepository.findByUsername(user.getUsername()) != null) {
+            return Response.fail("Duplicate username.");
+        }
+
+        if (userRepository.findByUscId(user.getUscId()) != null) {
+            return Response.fail("Duplicate USC-ID");
+        }
+
+        userRepository.saveAndFlush(user);
+
+        return Response.ok("Register successfully.");
     }
 
 }

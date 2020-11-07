@@ -1,28 +1,37 @@
 package com.usc.market.vo;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
+import org.springframework.http.HttpStatus;
 
-@Getter
-@Setter
 @AllArgsConstructor
-@NoArgsConstructor
+@Data
 public class Response<T> {
 
-    private boolean success;
+    private int code;
 
     private T data;
 
+    private String msg;
 
-    public static <T> Response<T> suc(T data) {
-        return new Response<>(true, data);
+    public static <T> Response<T> ok() {
+        return ok(null);
     }
 
-    public static <T> Response<T> fail(T data) {
-        return new Response<>(false, data);
+    public static <T> Response<T> ok(T data) {
+        return new Response<>(HttpStatus.OK.value(), data, null);
     }
 
+    public static <T> Response<T> fail(HttpStatus code, String msg) {
+        return new Response<>(code.value(), null, msg);
+    }
+
+    public static <T> Response<T> fail(String msg) {
+        return fail(HttpStatus.BAD_REQUEST, msg);
+    }
+
+    public static <T> Response<T> failAuth(String msg) {
+        return fail(HttpStatus.UNAUTHORIZED, msg);
+    }
 
 }

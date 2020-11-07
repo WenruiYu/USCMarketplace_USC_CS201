@@ -1,28 +1,24 @@
 package com.usc.market.repo;
 
-import com.usc.market.model.User;
-import org.springframework.data.domain.Sort;
+import com.usc.market.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
- * UserRepository
+ * UserEntityRepository
  * Usage:
  *
  * @author heleninsa
  * create time 2020/11/1 - 10:12 下午
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<UserEntity, Integer> {
 
-    User findByUsernameAndPassword(String username, String password);
+    UserEntity findByUsernameAndPassword(String username, String password);
 
-    User findByUsername(String username);
+    UserEntity findByUsername(String username);
 
-    List<User> findAllByTypeNotAndUsernameIsLikeOrderByIdDesc(int type, String username);
-
-    List<User> findAllByTypeNotOrderByIdDesc(int dep);
-
+    UserEntity findByUscId(String uscId);
 }
