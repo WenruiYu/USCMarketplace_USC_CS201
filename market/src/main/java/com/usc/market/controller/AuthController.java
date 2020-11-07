@@ -18,7 +18,7 @@ import java.util.Base64;
  * Usage:
  *
  * @author heleninsa
- * create time 2020/11/1 - 5:56 下午
+ * create time 2020/11/1 - 5:56 PM
  */
 @RestController
 @RequestMapping("/auth")
@@ -37,7 +37,7 @@ public class AuthController {
     public Response<String> login(@RequestBody Credential user) {
         UserEntity matcher = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         if (matcher == null) {
-             return Response.fail("用户名或密码错误。");
+             return Response.fail("Wrong Username/Password.");
         }
 
         // auth updater.

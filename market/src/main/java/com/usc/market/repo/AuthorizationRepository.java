@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * Usage:
  *
  * @author heleninsa
- * create time 2020/11/1 - 11:17 下午
+ * create time 2020/11/1 - 11:17 PM
  */
 @Repository
 public interface AuthorizationRepository extends JpaRepository<AuthEntity, String> {

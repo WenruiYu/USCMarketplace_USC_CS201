@@ -14,7 +14,7 @@ import java.util.Base64;
  * Usage:
  *
  * @author heleninsa
- * create time 2020/10/30 - 3:22 下午
+ * create time 2020/10/30 - 3:22 PM
  */
 @Component
 public class AuthComponent {
