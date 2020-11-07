@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  * Usage:
  *
  * @author heleninsa
- * create time 2020/11/1 - 10:12 下午
+ * create time 2020/11/1 - 10:12 PM
  */
 @Data
 @Entity

@@ -13,7 +13,7 @@ import javax.persistence.Table;
  * Usage:
  *
  * @author heleninsa
- * create time 2020/11/1 - 5:43 下午
+ * create time 2020/11/1 - 5:43 PM
  */
 @Data
 @Entity

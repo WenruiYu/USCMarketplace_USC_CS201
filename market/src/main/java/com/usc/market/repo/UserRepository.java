@@ -12,7 +12,7 @@ import java.util.List;
  * Usage:
  *
  * @author heleninsa
- * create time 2020/11/1 - 10:12 下午
+ * create time 2020/11/1 - 10:12 PM
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
