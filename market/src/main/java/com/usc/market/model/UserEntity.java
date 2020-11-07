@@ -10,7 +10,7 @@ import javax.persistence.*;
  * Usage:
  *
  * @author heleninsa
- * create time 2020/11/8 - 1:05 上午
+ * create time 2020/11/8 - 1:05 AM
  */
 @Entity
 @AllArgsConstructor

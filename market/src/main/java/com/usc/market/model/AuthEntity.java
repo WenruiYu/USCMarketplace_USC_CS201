@@ -11,7 +11,7 @@ import javax.persistence.*;
  * Usage:
  *
  * @author heleninsa
- * create time 2020/11/8 - 12:56 上午
+ * create time 2020/11/8 - 12:56 AM
  */
 @Data
 @NoArgsConstructor

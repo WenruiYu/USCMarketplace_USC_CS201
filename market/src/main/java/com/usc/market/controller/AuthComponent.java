@@ -1,7 +1,7 @@
 package com.usc.market.controller;
 
-import com.usc.market.model.Authorization;
-import com.usc.market.model.User;
+import com.usc.market.model.AuthEntity;
+import com.usc.market.model.UserEntity;
 import com.usc.market.repo.AuthorizationRepository;
 import com.usc.market.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +33,12 @@ public class AuthComponent {
         if (null == token || token.isEmpty()) {
             return false;
         } else {
-            User us = userRepository.findById(username).orElse(null);
+            UserEntity us = userRepository.findById(username).orElse(null);
             if (us == null) {
                 return false;
             }
 
-            Authorization auth = repository.findByUsername(us.getUsername());
+            AuthEntity auth = repository.findByUsername(us.getUsername());
 
             if (null == auth || !auth.getToken().equals(token)) {
                 return false;
