@@ -27,7 +27,7 @@ function reject(error) {
     } else {
       data = {
         code: error.response.status,
-        msg: '网络服务异常。'
+        msg: 'Network Service Error。'
       };
     }
   }
