@@ -43,7 +43,9 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         // ignore all auth checker
-        if (request.getRequestURI().startsWith("/auth/")) {
+        String url = request.getRequestURI();
+        if (url.startsWith("/auth/") || url.equals("/listing/findAll")) {
+            System.out.println("Ignore " + url);
             chain.doFilter(request, response);
             return;
         }
@@ -66,6 +68,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                         // add role & id to exists header
                         HeaderMapRequestWrapper wrapper = new HeaderMapRequestWrapper(request);
                         wrapper.addHeader("username", username);
+                        wrapper.addHeader("id", String.valueOf(userEntity.getId()));
                         request = wrapper;
                         System.out.println(request.getRequestURI());
                         chain.doFilter(request, response);

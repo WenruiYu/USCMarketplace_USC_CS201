@@ -21,6 +21,9 @@
                 <div class="login-btn">
                     <el-button type="primary" @click="submitForm()">Login</el-button>
                 </div>
+                <div class="login-btn">
+                    <el-button type="danger" @click="loginAsGuess()">Login As Guess</el-button>
+                </div>
                 <div>
                     <el-button class="login-tips" type="text" @click="loginType = 'register'">Sign Up ></el-button>
                 </div>
@@ -110,6 +113,9 @@
       };
     },
     methods: {
+      loginAsGuess() {
+        this.$router.push({path: '/'})
+      },
       submitForm() {
         let comp = this.$refs.loginPass;
         let param = this.passwordParam;

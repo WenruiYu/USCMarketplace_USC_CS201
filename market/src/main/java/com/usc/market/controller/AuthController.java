@@ -1,8 +1,8 @@
 package com.usc.market.controller;
 
+import com.usc.market.model.UserEntity;
 import com.usc.market.util.JwtTokenUtil;
 import com.usc.market.model.AuthEntity;
-import com.usc.market.model.UserEntity;
 import com.usc.market.repo.AuthorizationRepository;
 import com.usc.market.repo.UserRepository;
 import com.usc.market.vo.Credential;
@@ -46,8 +46,8 @@ public class AuthController {
         }
 
         String token = tokenUtil.generateToken(new User(user.getUsername(), user.getPassword(), Collections.emptyList()));
-        // persist to db
-        authorizationRepository.save(new AuthEntity(user.getUsername(), token));
+        // persist to db. there is no need to use this for we have jwt already
+        // authorizationRepository.save(new AuthEntity(user.getUsername(), token));
 
         return Response.ok(token);
     }

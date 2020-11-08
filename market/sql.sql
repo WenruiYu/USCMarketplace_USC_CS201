@@ -27,7 +27,7 @@ create table if not exists auth
 drop table if exists listing;
 create table if not exists listing
 (
-    listing_id       integer primary key auto_increment,
+    id               integer primary key auto_increment,
     owner_id         integer     not null,
     item_name        varchar(80) not null,
     item_description varchar(500),
@@ -46,8 +46,10 @@ create table if not exists listing
 drop table if exists favorite_listing;
 create table if not exists favorite_listing
 (
-    user_id    int not null,
-    listing_id int not null,
+    user_id    int  not null,
+    listing_id int  not null,
     gmt_create long not null,
-    primary key (user_id, listing_id)
+    primary key (user_id, listing_id),
+    foreign key (user_id) references user (id),
+    foreign key (listing_id) references listing (id)
 )

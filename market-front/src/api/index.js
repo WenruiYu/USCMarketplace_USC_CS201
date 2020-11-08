@@ -60,11 +60,22 @@ export const URL = {
     getInfo: '/account/getInfo',
     modifyInfo: '/account/modifyInfo',
     changePassword: '/account/changePassword',
+  },
+  Listing: {
+    findAll: '/listing/findAll',
+    addToFavorite: '/listing/addToFavorite',
+    removeFromFavorite: '/listing/removeFromFavorite',
+    myFavorite: '/listing/myFavorite',
+    myListing: '/listing/myListing',
+    addListingItem: '/listing/addListingItem',
+    updateListingItem: '/listing/updateListingItem',
+    deleteListingItem: '/listing/deleteListingItem',
   }
 };
 
 const WHITE_URL_PREFIX = [
-  '/auth/'
+  '/auth/',
+  '/listing/findAll'
 ];
 
 const TOKEN_HEADER = 'Authorization';

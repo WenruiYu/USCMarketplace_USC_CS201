@@ -20,7 +20,7 @@ public class AccountController {
     private UserRepository userRepository;
 
     @GetMapping(value = "/getInfo")
-    public Response<UserEntity> getInfo(@RequestHeader String username) {
+    public Response<UserEntity> getUserInfo(@RequestHeader String username) {
         UserEntity data = userRepository.findByUsername(username);
         data.setPassword("");
         return Response.ok(data);

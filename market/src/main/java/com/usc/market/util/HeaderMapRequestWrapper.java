@@ -4,6 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import java.util.*;
 
+/**
+ * HeaderMapRequestWrapper
+ * Usage:
+ *  Extend user ability to add custom header during filter handler
+ */
 public class HeaderMapRequestWrapper extends HttpServletRequestWrapper {
     public HeaderMapRequestWrapper(HttpServletRequest request) {
         super(request);

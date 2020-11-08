@@ -16,7 +16,6 @@
         font-family: Avenir, Helvetica, Arial, sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        text-align: center;
         color: #2c3e50;
     }
 
@@ -31,7 +30,6 @@
     .wrapper {
         width: 100%;
         height: 100%;
-        overflow: hidden;
     }
 
     body {
@@ -40,6 +38,12 @@
 
     a {
         text-decoration: none
+    }
+
+    img {
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
     }
 
 
@@ -53,6 +57,21 @@
         align-items: center;
         width: 100%;
         height: 100%;
+    }
+
+
+    .filterLabel {
+        width: 200px;
+        margin-right: 12px;
+        display: inline-block;
+    }
+
+    .filterInput {
+        width: 300px!important;
+    }
+
+    .listing-item-container {
+
     }
 
 </style>

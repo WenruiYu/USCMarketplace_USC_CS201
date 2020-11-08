@@ -13,7 +13,12 @@ router.beforeEach((to, from, next) => {
   document.title = `${to.meta.title} | USC Marketplace`;
   const token = localStorage.getItem(KEY_STORE.TOKEN);
   if (!token && to.path !== '/login' && to.path !== '/') {
-    next('/');
+    // toastError("No Permission To This Page!");
+    // if (from.path !== '/') {
+      next('/login');
+      // to.path = '/'
+      // router.push({path: '/'})
+    // }
   }
   else {
     next();
