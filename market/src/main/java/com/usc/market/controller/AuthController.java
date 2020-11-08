@@ -1,6 +1,6 @@
 package com.usc.market.controller;
 
-import com.usc.market.JwtTokenUtil;
+import com.usc.market.util.JwtTokenUtil;
 import com.usc.market.model.AuthEntity;
 import com.usc.market.model.UserEntity;
 import com.usc.market.repo.AuthorizationRepository;
@@ -39,6 +39,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public Response<String> login(@RequestBody Credential user) {
+        System.out.println(user.getUsername() + " " + user.getPassword());
         UserEntity matcher = userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
         if (matcher == null) {
              return Response.fail("Wrong Username/Password.");

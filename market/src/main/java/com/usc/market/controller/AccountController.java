@@ -12,13 +12,14 @@ import org.springframework.web.bind.annotation.*;
  * Usage:
  *  Account management controller
  */
+@RestController
 @RequestMapping("/account")
 public class AccountController {
 
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/getInfo")
+    @GetMapping(value = "/getInfo")
     public Response<UserEntity> getInfo(@RequestHeader String username) {
         UserEntity data = userRepository.findByUsername(username);
         data.setPassword("");

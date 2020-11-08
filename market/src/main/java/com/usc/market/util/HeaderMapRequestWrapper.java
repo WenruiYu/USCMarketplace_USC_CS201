@@ -1,4 +1,4 @@
-package com.usc.market;
+package com.usc.market.util;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;

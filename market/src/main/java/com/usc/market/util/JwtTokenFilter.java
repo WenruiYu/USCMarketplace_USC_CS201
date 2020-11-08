@@ -1,4 +1,4 @@
-package com.usc.market;
+package com.usc.market.util;
 
 import com.google.gson.Gson;
 import com.usc.market.model.UserEntity;
