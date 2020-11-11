@@ -45,7 +45,7 @@ export default new Router({
     {
       path: '/login',
       component: () => import(/* webpackChunkName: "login" */ '../page/Login.vue'),
-      meta: { title: 'Login to USCMarket' }
+      meta: { title: 'Login' }
     },
     {
       path: '*',

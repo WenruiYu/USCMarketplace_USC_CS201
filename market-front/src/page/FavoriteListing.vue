@@ -1,47 +1,32 @@
 <template>
     <div class="container">
         <div style="width: 85%">
-            <el-card>
-                <div slot="header" class="clearfix"
-                     style="display: flex; flex-direction: row; justify-content: space-between; align-items: center">
-                    <span>Filter options</span>
-                    <div style="float: right; padding: 0">
-                        <el-button
-                                @click="doFilter"
-                                style="color: #2d8cf0; border-bottom: #2d8cf0 1px solid; border-radius: 0; width: 90px"
-                                type="text">Do Filter
-                        </el-button>
-                    </div>
-                </div>
-                <div style="padding: 0 30px">
-                    <div style="margin-bottom: 8px">
-                        <span class="filterLabel">Filter by name: </span>
-                        <el-input class="filterInput" v-model="filter.itemName"></el-input>
-                    </div>
-                    <div style="margin-bottom: 8px">
-                        <span class="filterLabel">Filter by pickup location: </span>
-                        <el-select class="filterInput" v-model="filter.location" clearable
-                                   placeholder="Filter by pickup location">
-                            <el-option
-                                    v-for="(item, index) in locOptions"
-                                    :key="index"
-                                    :label="item"
-                                    :value="index">
-                            </el-option>
-                        </el-select>
-                    </div>
-                    <div style="margin-bottom: 8px">
-                        <span class="filterLabel">Filter by quality: </span>
-                        <el-select class="filterInput" v-model="filter.quality" clearable
-                                   placeholder="Filter by quality">
-                            <el-option
-                                    v-for="(item, index) in qualityOptions"
-                                    :key="index"
-                                    :label="item"
-                                    :value="index">
-                            </el-option>
-                        </el-select>
-                    </div>
+            <el-card style="margin-top: 15px;">  
+                <div class="clearfix" style="display: flex; flex-direction: row; align-items: center;">                     
+                    <span class="filterLabel searchTerm">Search Term:</span>
+                    <el-input class="filterInput" v-model="filter.itemName"></el-input>
+
+                    <el-select class="filterInput" v-model="filter.location" clearable
+                                placeholder="Filter by pickup location">
+                        <el-option
+                                v-for="(item, index) in locOptions"
+                                :key="index"
+                                :label="item"
+                                :value="index">
+                        </el-option>
+                    </el-select>
+
+                    <el-select class="filterInput" v-model="filter.quality" clearable
+                                placeholder="Filter by quality">
+                        <el-option
+                                v-for="(item, index) in qualityOptions"
+                                :key="index"
+                                :label="item"
+                                :value="index">
+                        </el-option>
+                    </el-select>
+
+                    <div class="search-button" @click="doFilter">Search</div>
                 </div>
             </el-card>
             <el-card style="margin-top: 12px; height: auto">
@@ -195,7 +180,29 @@
 </script>
 
 <style scoped>
+    .searchTerm {
+        width: 110px;
+        margin-right: 0px;
+    }
 
+    .filterInput {
+        margin-right: 20px;
+    }
+
+    .search-button {
+        color: #2d8cf0;
+        font-size: 18px;
+        border-bottom: #2d8cf0 1px solid;
+        padding-bottom: 5px;
+        cursor: pointer;
+        width: 90px;
+        text-align: center;
+    }
+    
+    .search-button:hover {
+        color: #0061c7;
+    }
+    
     .listing-item-container {
         font-size: 15px;
     }

@@ -1,7 +1,13 @@
 <template>
     <div class="login-wrap">
         <div class="ms-login">
-            <div class="ms-title">Welcome to USC Marketplace</div>
+            <div class="ms-title" v-if="loginType === 'password'">
+                <img class="logo" src="../assets/img/scmarketplace_logo_H.png">
+                Welcome to USC Marketplace
+            </div>
+            <div v-if="loginType === 'register'">
+                <img class="logo" src="../assets/img/scmarketplace_logo_H.png">
+            </div>
             <el-form :model="passwordParam" :rules="rules" ref="loginPass" label-width="0px" class="ms-content"
                      v-if="loginType === 'password'">
                 <el-form-item prop="username">
@@ -22,14 +28,14 @@
                     <el-button type="primary" @click="submitForm()">Login</el-button>
                 </div>
                 <div class="login-btn">
-                    <el-button type="danger" @click="loginAsGuess()">Login As Guess</el-button>
+                    <el-button type="danger" @click="loginAsGuest()">Login As Guest</el-button>
                 </div>
                 <div>
                     <el-button class="login-tips" type="text" @click="loginType = 'register'">Sign Up ></el-button>
                 </div>
             </el-form>
 
-            <el-form :model="registerForm" ref="registerForm" label-width="0px" class="ms-content"
+            <el-form :model="registerForm" ref="registerForm" label-width= "0px" class="ms-content" style="padding-top: 10px;"
                      v-else>
                 <el-form-item prop="username">
                     <el-input v-model="registerForm.username" placeholder="Username">
@@ -113,7 +119,7 @@
       };
     },
     methods: {
-      loginAsGuess() {
+      loginAsGuest() {
         this.$router.push({path: '/'})
       },
       submitForm() {
@@ -171,13 +177,22 @@
         background-size: 100%;
     }
 
+    .logo {
+        display: Block;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     .ms-title {
         width: 100%;
-        line-height: 50px;
+        line-height: 35px;
+        padding-bottom: 15px;
         text-align: center;
-        font-size: 20px;
+        font-size: 22px;
+        font-weight: 500;
         color: #000;
-        border-bottom: 1px solid #ddd;
+        border-bottom: 1px solid #cfcfcf;
     }
 
     .ms-login {
@@ -203,14 +218,17 @@
         width: 100%;
         height: 36px;
         margin-bottom: 10px;
+        line-height: 4px;
     }
 
     .login-tips {
         font-size: 12px;
+        font-weight: 600;
         color: #111;
         float: right;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         border-bottom: 1px solid black;
         border-radius: 0;
+        padding-bottom: 10px;
     }
 </style>
