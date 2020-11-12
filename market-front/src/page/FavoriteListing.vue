@@ -30,82 +30,76 @@
                 </div>
             </el-card>
             <el-card style="margin-top: 12px; height: auto">
-                <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+                <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around">
+                    <p v-if="data.length == 0" style="align: center; margin: 20px">You have no favorites yet, click the heart on items to favorite them!</p>
                     <el-card v-for="(item, index) in data" :key="index"
                              style="margin: 12px; min-width: 300px; width: 30%">
                         <div slot="header" class="clearfix"
                              style="display: flex; flex-direction: row; justify-content: space-between; align-items: center">
-                            <span>{{item.itemName}}</span>
-                            <div style="float: right; padding: 0; display: flex; align-items: center">
+                            <span @click="onPreview(index)" style="cursor: pointer;">{{item.itemName}}</span>
+                            <div style="float: right; padding: 0; display: flex; align-items: center; cursor: pointer">
                                 <img @click="onDisLike(index)" src="../assets/icon/heart-fill.svg">
-<!--                                <img @click="onDisLike(index)" src="../assets/icon/heart-fill.svg" v-if="item.isLike">-->
-<!--                                <img @click="onLike(index)" src="../assets/icon/heart-line.svg" v-else>-->
                             </div>
                         </div>
-                        <div class="listing-item-container">
-
-
-                            <div style="display: flex; flex-direction: row; align-items: center;">
-                                <span style="margin-right: 12px">
-                                    Is Sold:
-                                </span>
-                                <el-switch
-                                        style="margin-right: 12px">
-                                        v-model="item.sold"
-                                        :active-value="1"
-                                        inactive-value="0"
-                                        disabled>
-                                </el-switch>
-                                <span style="margin-right: 12px">
-                                    Is Held:
-                                </span>
-                                <el-switch
-                                        v-model="item.held"
-                                        :active-value="1"
-                                        inactive-value="0"
-                                        disabled>
-                                </el-switch>
-                            </div>
-
-                            <div>
-                                Quantity: {{item.quantity}}
-                            </div>
-
-                            <div>
-                                Quality: <span style="color: #2d8cf0">{{qualityOptions[item.quality]}}</span>
-                            </div>
-
-                            <div>
-                                Pickup Location: <span style="color: red">{{locOptions[item.pickupLoc]}}</span>
-                            </div>
-
-<!--                            <div>-->
-<!--                                Seller: <a href="#"> {{item.userByOwnerId.username}} </a> USC-ID: {{item.userByOwnerId.uscId}}-->
-<!--                            </div>-->
-
-<!--                            <div>-->
-<!--                                Seller Contact: {{item.userByOwnerId.mobile}}-->
-<!--                            </div>-->
-
-<!--                            <div>-->
-<!--                                Seller Email: {{item.userByOwnerId.email}}-->
-<!--                            </div>-->
-
-                            <div>
-                                Description:
-                            </div>
-                            <div style="font-size: 14px; font-weight: 500; word-break: break-word; margin: 0 12px 16px">
-                                {{item.itemDescription}}
-                            </div>
-
-                            <div></div>
-                            <img :src="data[index].image">
+                        <div class="listing-item-container" @click="onPreview(index)">
+                            <p>Description:</p>
+                            <p style="font-size: 14px; font-weight: 500; word-break: break-word; margin: 0 12px 16px">{{item.itemDescription}}</p>
+                            <p>Quantity: <span style="color: green">{{item.quantity}}</span></p>
+                            <p>Quality: <span style="color: #2d8cf0">{{qualityOptions[item.quality]}}</span></p>
+                            <p>Pickup Location: <span style="color: red">{{locOptions[item.pickupLoc]}}</span></p>
+                            <p>
+                              Availability: 
+                              <span v-if="item.sold == 1" style="color: red">Item has been sold</span>
+                              <span v-else-if="item.held == 1" style="color: orange">Item is being held</span>
+                              <span v-else style="color: green">Available</span>
+                            </p>
+                            <div class="item-image-container"><img class="item-image" :src="data[index].image"></div>
                         </div>
                     </el-card>
                 </div>
-                <p style="text-align: center; margin: 20px">No more data.</p>
             </el-card>
         </div>
+        <el-dialog :visible.sync="previewVisible" width="360">
+            <div slot="title" class="preview-title">{{previewItem.itemName}}</div>
+            <div class="preview-listing-item-container">
+                <div class="left-column">
+                    <p>Description:</p>
+                    <div style="font-size: 14px; font-weight: 500; word-break: break-word; margin: 0 12px 16px">
+                        {{previewItem.itemDescription}}
+                    </div><br>
+
+                    <div class="preview-image-container"><img class="preview-image" :src="previewItem.image"></div>
+                </div>
+                <div class="right-column">
+                    <p>Pickup Location: <span style="color: red">{{locOptions[previewItem.pickupLoc]}}</span></p>
+                    <p>Quality: <span style="color: #2d8cf0">{{qualityOptions[previewItem.quality]}}</span></p>
+                    <p>Quantity: {{previewItem.quantity}}</p><br>
+
+                    <div>
+                        <span style="margin-right: 8px">Is Sold:</span>
+                        <el-switch style="margin-right: 12px"
+                            v-model="previewItem.sold"
+                            :active-value="1"
+                            inactive-value="0"
+                            disabled>
+                        </el-switch>
+                        <span style="margin-right: 8px">Is Held:</span>
+                        <el-switch
+                            v-model="previewItem.held"
+                            :active-value="1"
+                            inactive-value="0"
+                            disabled>
+                        </el-switch>
+                    </div><br>
+
+                    <p>Seller: <a href="#">{{previewItem.userByOwnerId.username}}</a></p>   
+                    <p>Name: {{previewItem.userByOwnerId.realName}}</p> 
+                    <p>USC-ID: {{previewItem.userByOwnerId.uscId}}</p>
+                    <p>Seller Contact: {{previewItem.userByOwnerId.mobile}}</p>
+                    <p>Seller Email: {{previewItem.userByOwnerId.email}}</p>
+                </div>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -126,6 +120,10 @@
         },
         locOptions: ['Tommy Trojan', 'Hecuba', 'Lyon Center', 'SAL', 'USC Bookstore', 'Leavey'],
         qualityOptions: ['Brand New', 'New-Open Box', 'Like New', 'Used-Very Good', 'Used-Good', 'Used-Acceptable'],
+        previewVisible: false,
+        previewItem: {
+          userByOwnerId: {}
+        }
       }
     },
     mounted() {
@@ -140,6 +138,10 @@
           this.rawData = res.data
           this.data = this.rawData
         })
+      },
+      onPreview(index) {
+        this.previewVisible = true
+        this.previewItem = this.data[index]
       },
       doFilter() {
         let filter = [];
@@ -205,10 +207,66 @@
     
     .listing-item-container {
         font-size: 15px;
+        cursor: pointer;
     }
 
-    .listing-item-container > div {
+    .left-column {
+        flex: 1;
+        padding-bottom: 1rem;
+        padding-top: 0rem;
+        text-align: left;
+    }
+
+    .right-column {
+        flex: 1;
+        padding-bottom: 1rem;
+        padding-top: 0rem;
+        text-align: right;
+    }
+
+    .listing-item-container > p {
         margin: 8px 0;
     }
 
+    .item-image-container {
+        height: auto;
+        width: 50%; 
+        margin-top: 20px;
+    }
+
+    .item-image {
+        float: center;
+        max-height: 150px;
+        position: static;
+        border: 1px solid gray;
+        object-fit: cover;
+    }
+        
+    .preview-title {
+        font-size: 28px;
+        font-weight: 500;
+        margin-left: 15px;
+        margin-top: 10px;
+        padding-bottom: 0px;
+    }
+
+    .preview-image-container {
+        height: auto;
+        width: 100%; 
+    }
+
+    .preview-image {
+        float: left;
+        max-height: 360px;
+        position: relative;
+        border: 1px solid gray;
+        object-fit: cover;
+    }
+
+    .preview-listing-item-container {
+        display: flex;
+        font-size: 16px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
 </style>

@@ -1,7 +1,7 @@
 <template>
     <el-container>
         <el-header>
-            <div style="position: relative">
+            <div style="position: relative;">
                 <el-menu :default-active="activeIndex"  @tab-click="handleClick" router class="el-menu-demo" mode="horizontal">
                     <a href="#/"><img class="logo" src="../assets/img/scmarketplace_logo_H.png"></a>
                     <el-menu-item class="navbutton listingButton" index="/">Listing Square</el-menu-item>
@@ -51,7 +51,7 @@
 
     .logo {
         display: flex;
-        width: 15%;
+        width: 210px;
         position: absolute;
         margin-left: 5px;
     }

@@ -31,7 +31,7 @@
                 </div>
             </el-card>
             <el-card style="margin-top: 12px; height: auto">
-                <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+                <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around">
                     <el-card v-for="(i, index) in data" :key="index" style="margin: 12px; min-width: 300px; width: 30%">
                         <div slot="header" class="clearfix"
                              style="display: flex; flex-direction: row; justify-content: space-between; align-items: center">

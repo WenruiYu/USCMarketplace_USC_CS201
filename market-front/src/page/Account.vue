@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div style="width: 100%">
+        <div style="width: 100%; margin-top: 25px;">
             <el-tabs tabPosition="left" v-model="activeName">
                 <el-tab-pane label="Account Info" name="first">
                     <div class="form-box">
@@ -31,7 +31,7 @@
                         </el-form>
                     </div>
                 </el-tab-pane>
-                <el-tab-pane label="Modify Password" name="second" >
+                <el-tab-pane label="Modify Password" name="second">
                     <div class="form-box">
                         <el-form label-width="150px" style="width: 50%; min-width: 400px">
                             <el-form-item label="Current Password">
