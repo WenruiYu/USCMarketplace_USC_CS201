@@ -32,6 +32,7 @@
             </el-card>
             <el-card style="margin-top: 12px; height: auto">
                 <div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-around">
+                    <p v-if="data.length == 0" style="align: center; margin: 20px">You have no listings yet, go create one now!</p>
                     <el-card v-for="(i, index) in data" :key="index" style="margin: 12px; min-width: 300px; width: 30%">
                         <div slot="header" class="clearfix"
                              style="display: flex; flex-direction: row; justify-content: space-between; align-items: center">
@@ -123,7 +124,6 @@
                         </div>
                     </el-card>
                 </div>
-                <p style="text-align: center; margin: 20px">No more data.</p>
             </el-card>
         </div>
 
