@@ -2,6 +2,7 @@ package com.usc.market.controller;
 
 import com.usc.market.model.UserEntity;
 import com.usc.market.util.JwtTokenUtil;
+import com.usc.market.util.LogThread;
 import com.usc.market.model.AuthEntity;
 import com.usc.market.repo.AuthorizationRepository;
 import com.usc.market.repo.UserRepository;
@@ -49,6 +50,8 @@ public class AuthController {
         // persist to db. there is no need to use this for we have jwt already
         // authorizationRepository.save(new AuthEntity(user.getUsername(), token));
 
+        LogThread.LOG.addLog("Login Log");
+
         return Response.ok(token);
     }
 
@@ -75,7 +78,9 @@ public class AuthController {
 
         userRepository.saveAndFlush(user);
 
-        return Response.ok("Register successfully.");
+        LogThread.LOG.addLog("Registration Log");
+
+        return Response.ok("Registration successful.");
     }
 
 }
